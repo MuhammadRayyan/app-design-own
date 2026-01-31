@@ -237,7 +237,7 @@ function startSelfDestructCountdown() {
       clearInterval(selfDestructTimer);
       selfDestructTimer = null;
 
-      selfDestruct.textContent = "💥 BOOM—just kidding 😜❤️";
+      selfDestruct.textContent = "💥 BOOM — heheheeheheheheh 😜❤️";
       triggerBoomSequence();
     }
   }, 1000);
