@@ -135,6 +135,7 @@ yesBtn.addEventListener("click", acceptLove);
 
 function acceptLove() {
   text.innerText = "Mujhe pata tha maan jayen gii 🤭❤️";
+   
   img.style.backgroundImage = "url(assets/thanks.gif)";
 
   yesBtn.style.display = "none";
