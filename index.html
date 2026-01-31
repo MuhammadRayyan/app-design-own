@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Do You Love Me ❤️</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- 🔊 Music Toggle -->
+  <button id="music" aria-label="Toggle music">🔊</button>
+
+  <!-- 🎨 Theme -->
+  <button id="theme" aria-label="Change theme">🎨</button>
+
+  <!-- 💌 MAIN CONTAINER -->
+  <div class="container">
+
+    <!-- 💖 CARD -->
+    <div class="card" id="card">
+
+      <!-- IMAGE / GIF -->
+      <div class="image" id="img"></div>
+
+      <!-- QUESTION -->
+      <p class="question" id="text">
+        Do you love me? ❤️
+      </p>
+
+      <!-- YES / NO -->
+      <div class="buttons">
+        <button class="btn yes">Yes</button>
+        <button class="btn no">No</button>
+      </div>
+
+      <!-- 🎁 GIFT -->
+      <button id="gift">🎁 Claim Your Gift</button>
+
+      <!-- 💌 SHARE -->
+      <button id="share">💌 Share on WhatsApp</button>
+    </div>
+
+    <!-- 🎀 GIFT COVER -->
+    <div class="gift-cover" id="cover">
+      <span>Tap to open 🎀</span>
+    </div>
+  </div>
+
+  <!-- 💖 POPUP / PROPOSAL -->
+  <div class="popup" id="popup" role="dialog" aria-modal="true">
+    <div class="popup-box">
+
+      <span class="popup-heart">💖</span>
+
+      <h2>For You 💕</h2>
+
+      <p class="popup-text">
+        You are not just special…<br>
+        You are the reason someone smiles today 😊<br><br>
+        Thank you for choosing love ❤️
+      </p>
+
+      <div class="popup-actions">
+        <button id="closePopup">Aww 🥰</button>
+        <button id="saveShot">📸 Save Memory</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 🎵 BACKGROUND MUSIC -->
+  <audio id="bgMusic" loop>
+    <source src="assets/bg-love-music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- 🔊 POPUP SOUND -->
+  <audio id="awwSound">
+    <source src="assets/aww.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- 📸 SCREENSHOT LIBRARY -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+  <!-- MAIN SCRIPT -->
+  <script src="main.js"></script>
+
+</body>
+</html>
