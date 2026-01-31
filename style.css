@@ -26,6 +26,20 @@ body {
   color: white;
 }
 
+.self-destruct {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; transform: translateY(0); }
+  50% { opacity: 0.25; transform: translateY(1px); }
+}
+
+
 /* ======================
    TOP BUTTONS
 ====================== */
@@ -390,3 +404,35 @@ body {
     color: #3a003a;
   }
 }
+
+.shake {
+  animation: shake 0.12s infinite;
+}
+
+@keyframes shake {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(2px, -2px) rotate(-1deg); }
+  50% { transform: translate(-2px, 2px) rotate(1deg); }
+  75% { transform: translate(2px, 2px) rotate(0deg); }
+  100% { transform: translate(-2px, -2px) rotate(0deg); }
+}
+
+.boom {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 90px;
+  animation: boomPop 0.35s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes boomPop {
+  from { transform: scale(0.2); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.panic-box {
+  background: linear-gradient(135deg, #fff7d6, #ffd1dc);
+}
+
