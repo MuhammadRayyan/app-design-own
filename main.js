@@ -175,20 +175,17 @@ cover.addEventListener("click", () => {
 
 
 closePopup.addEventListener("click", () => {
-  popup.style.display = "none";
+  // ✅ DO NOT close the popup
+  // popup.style.display = "none";  // <-- remove / keep commented
+
+  // ✅ just play the sound
   awwSound.currentTime = 0;
   awwSound.play().catch(err => console.log("aww sound error:", err));
 
-  // ✅ stop countdown if user closes popup early
-  if (selfDestructTimer) clearInterval(selfDestructTimer);
-  selfDestructTimer = null;
-
-  if (boomTimeout) clearTimeout(boomTimeout);
-  boomTimeout = null;
-
-  if (selfDestruct) selfDestruct.textContent = "";
-  card.classList.remove("shake");
+  // ✅ do NOT clear the countdown timers
+  // (so self-destruct continues and will still trigger Bhaagoo)
 });
+
 
 
 /* =========================
