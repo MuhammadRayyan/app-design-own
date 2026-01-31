@@ -14,6 +14,16 @@ const popup = document.getElementById("popup");
 const closePopup = document.getElementById("closePopup");
 const saveShot = document.getElementById("saveShot");
 
+// 💣 Self destruct text
+const selfDestruct = document.getElementById("selfDestruct");
+
+// 🏃‍♂️ Panic popup elements
+const panicPopup = document.getElementById("panicPopup");
+const closePanic = document.getElementById("closePanic");
+
+let selfDestructTimer = null;
+let boomTimeout = null;
+
 const card = document.getElementById("card");
 
 const music = document.getElementById("bgMusic");
@@ -124,13 +134,15 @@ noBtn.addEventListener("touchstart", moveNoButton);
 yesBtn.addEventListener("click", acceptLove);
 
 function acceptLove() {
-  text.innerText = "Mujhe pata tha aap maan jayen gi ❤️";
+  text.innerText = "Mujhe pata tha tum maan jaogi ❤️";
   img.style.backgroundImage = "url(assets/thanks.gif)";
 
   yesBtn.style.display = "none";
   noBtn.style.display = "none";
   giftBtn.style.display = "block";
-  shareBtn.style.display = "block";
+
+  // ✅ only show share if it exists in HTML
+  if (shareBtn) shareBtn.style.display = "block";
 
   confettiBurst();
 
@@ -144,6 +156,7 @@ function acceptLove() {
   }
 }
 
+
 /* =========================
    GIFT & POPUP
 ========================= */
@@ -155,13 +168,81 @@ cover.addEventListener("click", () => {
   cover.style.display = "none";
   popup.style.display = "flex";
   confettiBurst();
+
+  startSelfDestructCountdown(); // ✅ start the funny timer
 });
+
 
 closePopup.addEventListener("click", () => {
   popup.style.display = "none";
   awwSound.currentTime = 0;
   awwSound.play().catch(err => console.log("aww sound error:", err));
+
+  // ✅ stop countdown if user closes popup early
+  if (selfDestructTimer) clearInterval(selfDestructTimer);
+  selfDestructTimer = null;
+
+  if (boomTimeout) clearTimeout(boomTimeout);
+  boomTimeout = null;
+
+  if (selfDestruct) selfDestruct.textContent = "";
+  card.classList.remove("shake");
 });
+
+
+/* =========================
+   BOMB
+========================= */
+function triggerBoomSequence() {
+  // Add shake to the card
+  card.classList.add("shake");
+
+  // Create an explosion overlay inside popup
+  const boom = document.createElement("div");
+  boom.className = "boom";
+  boom.textContent = "💥";
+  const popupBox = popup.querySelector(".popup-box");
+  if (popupBox) popupBox.appendChild(boom);
+
+  // Confetti for extra drama
+  confettiBurst();
+
+  // After a moment, hide first popup and show Bhaagoo popup
+  boomTimeout = setTimeout(() => {
+    // cleanup shake + boom
+    card.classList.remove("shake");
+    boom.remove();
+
+    popup.style.display = "none";
+    if (panicPopup) panicPopup.style.display = "flex";
+  }, 1200);
+}
+
+function startSelfDestructCountdown() {
+  if (!selfDestruct) return;
+
+  // Clear previous timer/timeouts if popup opened again
+  if (selfDestructTimer) clearInterval(selfDestructTimer);
+  if (boomTimeout) clearTimeout(boomTimeout);
+
+  let t = 10;
+  selfDestruct.textContent = `💣 Self destruct in ${t}…`;
+
+  selfDestructTimer = setInterval(() => {
+    t -= 1;
+
+    if (t > 0) {
+      selfDestruct.textContent = `💣 Self destruct in ${t}…`;
+    } else {
+      clearInterval(selfDestructTimer);
+      selfDestructTimer = null;
+
+      selfDestruct.textContent = "💥 BOOM—just kidding 😜❤️";
+      triggerBoomSequence();
+    }
+  }, 1000);
+}
+
 
 /* =========================
    FLOATING HEARTS
@@ -198,13 +279,16 @@ function confettiBurst() {
 /* =========================
    WHATSAPP SHARE
 ========================= */
-shareBtn.addEventListener("click", () => {
-  const msg = encodeURIComponent(
-    "Someone just said YES to love ❤️😍\nTry this cute page 👉 "
-  );
-  const url = encodeURIComponent(window.location.href);
-  window.open(`https://wa.me/?text=${msg}${url}`, "_blank");
-});
+if (shareBtn) {
+  shareBtn.addEventListener("click", () => {
+    const msg = encodeURIComponent(
+      "Someone just said YES to love ❤️😍\nTry this cute page 👉 "
+    );
+    const url = encodeURIComponent(window.location.href);
+    window.open(`https://wa.me/?text=${msg}${url}`, "_blank");
+  });
+}
+
 
 /* =========================
    THEME GLOW
@@ -220,11 +304,20 @@ themeBtn.addEventListener("click", () => {
 /* =========================
    SCREENSHOT
 ========================= */
-saveShot.addEventListener("click", () => {
-  html2canvas(card).then(canvas => {
-    const link = document.createElement("a");
-    link.download = "love-memory.png";
-    link.href = canvas.toDataURL();
-    link.click();
+if (saveShot) {
+  saveShot.addEventListener("click", () => {
+    html2canvas(card).then(canvas => {
+      const link = document.createElement("a");
+      link.download = "love-memory.png";
+      link.href = canvas.toDataURL();
+      link.click();
+    });
   });
-});
+}
+
+
+if (closePanic && panicPopup) {
+  closePanic.addEventListener("click", () => {
+    panicPopup.style.display = "none";
+  });
+}
