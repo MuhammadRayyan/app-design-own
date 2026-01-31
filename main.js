@@ -89,12 +89,12 @@ musicBtn.addEventListener("click", () => {
    NO BUTTON STEPS
 ========================= */
 const stepsData = [
-  { text: "Soch lo 🤔", image: "assets/think.gif" },
-  { text: "Ek baar aur soch lo 😢", image: "assets/sadface.gif" },
+  { text: "Soch lein 🤔", image: "assets/think.gif" },
+  { text: "Ek baar aur soch lein 😢", image: "assets/sadface.gif" },
   { text: "Please maan jao 🥺", image: "assets/plz.gif" },
-  { text: "Itna bhaav mat khao 😠", image: "assets/attitude.gif" },
+  { text: "Array itni zidd 😠", image: "assets/attitude.gif" },
   { text: "Sach me nahi? 😭", image: "assets/cry.gif" },
-  { text: "Cute ho yaar tum 😍", image: "assets/cute.gif" },
+  { text: "Booht cute hain aap too 😍", image: "assets/cute.gif" },
   { text: "Last chance ❤️", image: "assets/loveme.gif" }
 ];
 
@@ -124,7 +124,7 @@ noBtn.addEventListener("touchstart", moveNoButton);
 yesBtn.addEventListener("click", acceptLove);
 
 function acceptLove() {
-  text.innerText = "Mujhe pata tha tum maan jaogi ❤️";
+  text.innerText = "Mujhe pata tha aap maan jayen gi ❤️";
   img.style.backgroundImage = "url(assets/thanks.gif)";
 
   yesBtn.style.display = "none";
